@@ -10,8 +10,8 @@ class GenerosClientes(models.Model):
     GeneroName = models.CharField(max_length = 500)
 
 class GenerosLiterarios(models.Model):
-    GeneroClienteId = models.AutoField(primary_key = True)
-    GeneroName = models.CharField(max_length = 500)
+    GeneroLiterarioId = models.AutoField(primary_key = True)
+    GeneroLiterarioName = models.CharField(max_length = 500)
 
 class Ciudades(models.Model):
     CiudadId = models.AutoField(primary_key = True)
