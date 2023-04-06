@@ -43,8 +43,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='GenerosLiterarios',
             fields=[
-                ('GeneroClienteId', models.AutoField(primary_key=True, serialize=False)),
-                ('GeneroName', models.CharField(max_length=500)),
+                ('GeneroLiterarioId', models.AutoField(primary_key=True, serialize=False)),
+                ('GeneroLiterarioName', models.CharField(max_length=500)),
             ],
         ),
         migrations.CreateModel(

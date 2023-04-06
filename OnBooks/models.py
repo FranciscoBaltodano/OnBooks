@@ -24,5 +24,12 @@ class Editoriales(models.Model):
 class Autores(models.Model):
     AutorId = models.AutoField(primary_key = True)
     AutorName = models.CharField(max_length = 500)
-    AutorDate = models.DateField()
 
+class Libros(models.Model):
+    LibroId = models.AutoField(primary_key= True)
+    LibroName = models.CharField(max_length=200)
+    LibroIdioma = models.ForeignKey(Idiomas, null=True, blank=True, on_delete=models.CASCADE)
+    LibroGenero = models.ForeignKey(GenerosLiterarios, null=True, blank=True, on_delete=models.CASCADE)
+    LibroAutor = models.ForeignKey(Autores, null=True, blank=True, on_delete=models.CASCADE)
+    LibroEditorial = models.ForeignKey(Editoriales, null=True, blank=True, on_delete=models.CASCADE)
+    

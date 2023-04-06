@@ -19,4 +19,7 @@ urlpatterns = [
     
     re_path(r'^autor$', views.autorApi),
     re_path(r'^autor/([0-9]+)$', views.autorApi),
+    
+    re_path(r'^libro$', views.libroApi),
+    re_path(r'^libro/([0-9]+)$', views.libroApi),
 ]

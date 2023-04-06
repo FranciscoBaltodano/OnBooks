@@ -4,8 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
-from OnBooks.models import Idiomas,  GenerosClientes, GenerosLiterarios, Ciudades, Editoriales, Autores
-from OnBooks.serializers import IdiomaSerializer, GeneroClienteSerializer, GeneroLiterarioSerializer, CiudadSerializer, EditorialSerializer, AutorSerializer
+from OnBooks.models import Idiomas,  GenerosClientes, GenerosLiterarios, Ciudades, Editoriales, Autores, Libros
+from OnBooks.serializers import IdiomaSerializer, GeneroClienteSerializer, GeneroLiterarioSerializer, CiudadSerializer, EditorialSerializer, AutorSerializer, LibroSerializer
 
 # Create your views here.
 
@@ -61,11 +61,11 @@ def generoClienteApi(request, id=0):
         generoCliente.delete()
         return JsonResponse('Eliminado Exitosamente', safe=False)
 
-@csrf_exempt #LITERARIO
+@csrf_exempt 
 def generoLiterarioApi(request, id=0):
     if request.method=='GET':
-        generosLiterario = GenerosLiterarios.objects.all()
-        generoLiterario_serializer =  GeneroLiterarioSerializer(generosLiterario, many = True)
+        generosLiterarios = GenerosLiterarios.objects.all()
+        generoLiterario_serializer =  GeneroLiterarioSerializer(generosLiterarios, many = True)
         return JsonResponse(generoLiterario_serializer.data, safe=False)
     elif request.method == 'POST':
         generoLiterario_data = JSONParser().parse(request)
@@ -86,6 +86,32 @@ def generoLiterarioApi(request, id=0):
         generoLiterario = GenerosLiterarios.objects.get(GeneroLiterarioId=id)
         generoLiterario.delete()
         return JsonResponse('Eliminado Exitosamente', safe=False)
+
+# @csrf_exempt #LITERARIO
+# def generoLiterarioApi(request, id=0):
+#     if request.method=='GET':
+#         generosLiterario = GenerosLiterarios.objects.all()
+#         generoLiterario_serializer =  GeneroLiterarioSerializer(generosLiterario, many = True)
+#         return JsonResponse(generoLiterario_serializer.data, safe=False)
+#     elif request.method == 'POST':
+#         generoLiterario_data = JSONParser().parse(request)
+#         generoLiterario_serializer = GeneroLiterarioSerializer(data = generoLiterario_data)
+#         if generoLiterario_serializer.is_valid():
+#             generoLiterario_serializer.save()
+#             return JsonResponse('Añadido Exitosamente!!!',safe=False)
+#         return JsonResponse("Fallo al intentar agregar", safe=False)
+#     elif request.method=='PUT':
+#         generoLiterario_data = JSONParser().parse(request)
+#         generoLiterario = GenerosLiterarios.objects.get(GeneroLiterarioId=generoLiterario_data['GeneroLiterarioId'])
+#         generoLiterario_serializer = GeneroLiterarioSerializer(generoLiterario, data=generoLiterario_data)
+#         if generoLiterario_serializer.is_valid():
+#             generoLiterario_serializer.save()
+#             return JsonResponse('Actualizado Exitosamente!!!!',safe=False)
+#         return JsonResponse("Fallo al Actualizar")
+#     elif request.method=='DELETE':
+#         generoLiterario = GenerosLiterarios.objects.get(GeneroLiterarioId=id)
+#         generoLiterario.delete()
+#         return JsonResponse('Eliminado Exitosamente', safe=False)
 
 @csrf_exempt
 def ciudadApi(request, id=0):
@@ -165,4 +191,33 @@ def autorApi(request, id=0):
     elif request.method=='DELETE':
         autor = Autores.objects.get(AutorId=id)
         autor.delete()
+        return JsonResponse('Eliminado Exitosamente', safe=False)
+
+
+
+
+@csrf_exempt 
+def libroApi(request, id=0):
+    if request.method=='GET':
+        libros = Libros.objects.all()
+        libro_serializer =  LibroSerializer(libros, many = True)
+        return JsonResponse(libro_serializer.data, safe=False)
+    elif request.method == 'POST':
+        libro_data = JSONParser().parse(request)
+        libro_serializer = LibroSerializer(data = libro_data)
+        if libro_serializer.is_valid():
+            libro_serializer.save()
+            return JsonResponse('Añadido Exitosamente!!!',safe=False)
+        return JsonResponse("Fallo al intentar agregar", safe=False)
+    elif request.method=='PUT':
+        libro_data = JSONParser().parse(request)
+        libro = Libros.objects.get(LibroId=libro_data['LibroId'])
+        libro_serializer = LibroSerializer(libro, data=libro_data)
+        if libro_serializer.is_valid():
+            libro_serializer.save()
+            return JsonResponse('Actualizado Exitosamente!!!!',safe=False)
+        return JsonResponse("Fallo al Actualizar")
+    elif request.method=='DELETE':
+        libro = Libros.objects.get(LibroId=id)
+        libro.delete()
         return JsonResponse('Eliminado Exitosamente', safe=False)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from OnBooks.models import Idiomas,  GenerosClientes, GenerosLiterarios, Ciudades, Editoriales, Autores
+from OnBooks.models import Idiomas,  GenerosClientes, GenerosLiterarios, Ciudades, Editoriales, Autores, Libros
 
 class IdiomaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,3 +30,11 @@ class AutorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Autores 
         fields = ('AutorId', 'AutorName', 'AutorDate')
+
+class LibroSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Libros 
+        fields = ('LibroId', 'LibroName', 'LibroIdioma', 'LibroGenero', 'LibroAutor', 'LibroEditorial')
+
+
+
